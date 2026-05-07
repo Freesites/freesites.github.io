@@ -1,0 +1,21 @@
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+
+[functions]
+  # esbuild bundles each function into a single file. Prompt templates are
+  # not imported as JS modules — they are loaded at runtime via fs.readFileSync.
+  # included_files ensures they are copied into the Lambda deployment package
+  # at their original paths so process.cwd() + "src/prompts" resolves correctly.
+  node_bundler = "esbuild"
+  included_files = ["src/prompts/**"]
+
+# Background functions (file name suffix -background) run asynchronously for
+# up to 15 minutes and respond 202 immediately. No explicit timeout needed.
+# Regular functions default to 10s; raise to 26s (Netlify's synchronous max)
+# for webhook and intake handlers that call external APIs.
+[functions."intake"]
+  timeout = 26
+
+[functions."stripe-webhook"]
+  timeout = 26

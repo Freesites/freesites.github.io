@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreeSites — Get Your Free Contractor Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================================
+       RESET & BASE
+    ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:     #0f172a;
+      --navy-2:   #1e293b;
+      --indigo:   #4f46e5;
+      --indigo-l: #6366f1;
+      --orange:   #f97316;
+      --green:    #16a34a;
+      --red:      #dc2626;
+      --bg:       #f8fafc;
+      --border:   #e2e8f0;
+      --text:     #0f172a;
+      --muted:    #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ================================================================
+       HEADER
+    ================================================================ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--indigo-l); }
+
+    .header-nav a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .header-nav a:hover { color: #fff; }
+
+    /* ================================================================
+       HERO
+    ================================================================ */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 64px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Radial gradient overlays */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+    .hero::before {
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 100%, rgba(79,70,229,.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 10%,  rgba(249,115,22,.2)  0%, transparent 55%);
+    }
+    .hero::after {
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+    /* Eyebrow pill badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79,70,229,.25);
+      border: 1px solid rgba(99,102,241,.4);
+      color: #a5b4fc;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+    .hero-badge svg { flex-shrink: 0; }
+
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    /* Trust strip */
+    .trust-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      color: rgba(255,255,255,.6);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-item svg { flex-shrink: 0; color: #86efac; }
+
+    /* ================================================================
+       MAIN / CARDS
+    ================================================================ */
+    main {
+      max-width: 660px;
+      margin: -28px auto 72px;
+      padding: 0 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    /* Card header: icon square + h2 */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-l) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-icon svg { color: #fff; }
+
+    .card h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ================================================================
+       FORM FIELDS
+    ================================================================ */
+    .field { margin-bottom: 18px; }
+    .field:last-child { margin-bottom: 0; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    .field label .req { color: var(--red); margin-left: 2px; }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: #fff;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 38px;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+    }
+    .field .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .row-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+
+    /* Checkbox fields */
+    .checkbox-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--indigo);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .checkbox-field span {
+      font-size: 14px;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    /* ================================================================
+       SECTION TOGGLE (Optional Details)
+    ================================================================ */
+    .section-toggle {
+      background: none;
+      border: none;
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      transition: color 0.15s;
+    }
+    .section-toggle:hover { color: var(--indigo); }
+
+    .toggle-arrow-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .section-toggle:hover .toggle-arrow-badge { background: #e0e7ff; }
+
+    .arrow {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--muted);
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    .section-toggle.open .arrow { transform: rotate(90deg); }
+    .section-toggle.open .toggle-arrow-badge { background: #e0e7ff; }
+
+    .optional-fields { display: none; }
+    .optional-fields.open { display: block; }
+
+    /* ================================================================
+       LOGO UPLOAD
+    ================================================================ */
+    .logo-upload-area {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      transition: border-color 0.15s;
+    }
+    .logo-upload-area:hover { border-color: var(--indigo); }
+
+    #logoFile {
+      display: block;
+      width: 100%;
+      padding: 6px 0;
+      border: none !important;
+      background: none !important;
+      box-shadow: none !important;
+      font-size: 14px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    /* ================================================================
+       SERVICES
+    ================================================================ */
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      gap: 8px;
+      align-items: start;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .service-row input,
+    .service-row textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .service-row input:focus,
+    .service-row textarea:focus {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+    }
+    .service-row textarea {
+      resize: none;
+      height: 38px;
+    }
+    .service-row .rm-btn {
+      padding: 8px 10px;
+      background: #fff;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+      transition: background 0.15s;
+      line-height: 1;
+    }
+    .service-row .rm-btn:hover { background: #fee2e2; }
+
+    .add-service-btn {
+      margin-top: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--indigo);
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .add-service-btn:hover { background: #e0e7ff; }
+
+    /* ================================================================
+       BETA SECTION
+    ================================================================ */
+    .beta-section {
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+    .beta-section .field label { color: var(--muted); }
+
+    /* ================================================================
+       ERROR MESSAGE
+    ================================================================ */
+    .error-msg {
+      background: #fef2f2;
+      color: var(--red);
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 12px 16px 12px 42px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      display: none;
+      position: relative;
+    }
+    .error-msg::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .error-msg.show { display: block; }
+
+    /* ================================================================
+       SUBMIT BUTTON
+    ================================================================ */
+    .submit-btn {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--orange) 0%, #fb923c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(249,115,22,.4);
+      margin-top: 6px;
+      letter-spacing: -0.01em;
+    }
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; right: auto; bottom: 0;
+      width: 60%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.25) 50%, transparent 60%);
+      transition: left 0.5s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249,115,22,.45);
+    }
+    .submit-btn:hover::after { left: 150%; }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ================================================================
+       BUILDING SCREEN
+    ================================================================ */
+    #building-screen { display: none; }
+
+    .build-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      padding: 44px 36px;
+      text-align: center;
+    }
+
+    .build-icon-wrap {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .build-icon-wrap #build-icon { font-size: 36px; line-height: 1; }
+
+    #build-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    #build-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Steps */
+    .steps {
+      text-align: left;
+      max-width: 340px;
+      margin: 0 auto 28px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #94a3b8;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .step:last-child { border-bottom: none; }
+
+    .step .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #94a3b8;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    .step.active {
+      color: var(--indigo);
+    }
+    .step.active .dot {
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-l) 100%);
+      color: #fff;
+      animation: pulse-glow 1.5s ease-in-out infinite;
+    }
+
+    .step.done { color: var(--green); }
+    .step.done .dot {
+      background: linear-gradient(135deg, var(--green) 0%, #22c55e 100%);
+      color: #fff;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79,70,229,.4); }
+      50%       { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(79,70,229,.0); }
+    }
+
+    /* URL box */
+    .url-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .url-box .label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .url-box a {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      word-break: break-all;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .url-box a:hover { color: var(--indigo); text-decoration: underline; }
+    .url-box.ready {
+      border-color: var(--green);
+      background: #f0fdf4;
+    }
+    .url-box.ready a { color: #15803d; }
+
+    .timer {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    #countdown {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .portal-link {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+    .portal-link a {
+      color: var(--indigo);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .portal-link a:hover { text-decoration: underline; }
+    .portal-link .portal-open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-l) 100%);
+      color: #fff !important;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none !important;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 12px rgba(79,70,229,.3);
+    }
+    .portal-link .portal-open-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(79,70,229,.4);
+    }
+
+    /* ================================================================
+       FOOTER
+    ================================================================ */
+    footer {
+      background: var(--navy-2);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+    }
+    footer a {
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+    }
+    footer a:hover { color: #fff; }
+
+    /* ================================================================
+       RESPONSIVE
+    ================================================================ */
+    @media (max-width: 480px) {
+      header { padding: 0 16px; }
+      .hero { padding: 44px 16px 68px; }
+      .hero h1 { font-size: 28px; }
+      .hero-sub { font-size: 15px; }
+      .trust-strip { gap: 6px 16px; font-size: 12px; }
+      main { padding: 0 12px; }
+      .card { padding: 20px 16px; }
+      .row-2, .row-3 { grid-template-columns: 1fr; }
+      .build-card { padding: 28px 20px; }
+      .svc-desc { display: none; }
+      .service-row { grid-template-columns: 1fr auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       HEADER
+  ================================================================ -->
+  <header>
+    <a href="/" class="logo">Free<span>Sites</span></a>
+    <nav class="header-nav">
+      <a href="/portal/login.html">Sign in &rarr;</a>
+    </nav>
+  </header>
+
+  <!-- ================================================================
+       HERO
+  ================================================================ -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Built with Claude AI &middot; No credit card needed
+      </div>
+
+      <h1>Your contractor site,<br><span class="gradient-text">live in 60 seconds</span></h1>
+
+      <p class="hero-sub">
+        Fill in your business info and we'll build a professional website in under 2 minutes — completely free.
+      </p>
+
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Free forever
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No credit card
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Live URL included
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Edit anytime
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MAIN
+  ================================================================ -->
+  <main>
+
+    <!-- ===== INTAKE FORM ===== -->
+    <div id="form-screen">
+
+      <!-- Business Info Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h2>Business Info</h2>
+        </div>
+
+        <div class="error-msg" id="error-msg"></div>
+
+        <div class="field">
+          <label>Business Name <span class="req">*</span></label>
+          <input type="text" id="businessName" placeholder="e.g. Smith Plumbing" maxlength="100">
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label>Your Name</label>
+            <input type="text" id="ownerName" placeholder="e.g. John Smith" maxlength="100">
+          </div>
+          <div class="field">
+            <label>Trade <span class="req">*</span></label>
+            <select id="verticalType">
+              <option value="">— Select —</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="hvac">HVAC</option>
+              <option value="roofing">Roofing</option>
+              <option value="church">Church / Faith Community</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label>Phone <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="555-123-4567" maxlength="20">
+          </div>
+          <div class="field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div class="row-3">
+          <div class="field">
+            <label>City <span class="req">*</span></label>
+            <input type="text" id="city" placeholder="e.g. Austin" maxlength="100">
+          </div>
+          <div class="field">
+            <label>State <span class="req">*</span></label>
+            <input type="text" id="state" placeholder="TX" maxlength="50">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Biggest challenge getting customers <span class="req">*</span></label>
+          <select id="biggestChallenge">
+            <option value="">— Select your biggest challenge —</option>
+            <option>I'm not getting enough calls from new customers</option>
+            <option>Customers can't find me online when they search</option>
+            <option>I look less professional than my competitors</option>
+            <option>I'm missing calls after hours and on weekends</option>
+            <option>I don't have a way to show off my reviews</option>
+            <option>My current website is outdated or hard to update</option>
+            <option>I'm spending money on ads but getting no results</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Optional Details Card -->
+      <div class="card">
+        <button type="button" class="section-toggle" id="optional-toggle">
+          <span class="toggle-arrow-badge"><span class="arrow">&#9658;</span></span>
+          Optional details <span style="font-weight:400;color:var(--muted);margin-left:4px">(improves your website)</span>
+        </button>
+        <div class="optional-fields" id="optional-fields">
+
+          <div class="field">
+            <label>Tagline / Slogan</label>
+            <input type="text" id="tagline" placeholder="e.g. Fast, Reliable, Affordable" maxlength="200">
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Years in business</label>
+              <input type="number" id="yearsInBusiness" placeholder="e.g. 12" min="0" max="150">
+            </div>
+            <div class="field">
+              <label>License number</label>
+              <input type="text" id="licenseNumber" placeholder="e.g. LIC-123456" maxlength="50">
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label>Google rating</label>
+              <input type="number" id="googleRating" placeholder="4.9" min="1" max="5" step="0.1">
+            </div>
+            <div class="field">
+              <label>Number of reviews</label>
+              <input type="number" id="reviewCount" placeholder="e.g. 87" min="0">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Booking / scheduling URL</label>
+            <input type="text" id="bookingUrl" placeholder="e.g. calendly.com/yourname" maxlength="300">
+          </div>
+
+          <div class="field">
+            <label>Service areas <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label>
+            <input type="text" id="serviceAreas" placeholder="e.g. Austin, Round Rock, Cedar Park">
+            <div class="hint">Cities or neighborhoods you serve</div>
+          </div>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="emergency24x7" style="width:auto;padding:0;">
+            <span>24/7 emergency service available</span>
+          </label>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="insuranceVerified" style="width:auto;padding:0;">
+            <span>Fully insured</span>
+          </label>
+
+          <!-- Business Hours -->
+          <div class="field">
+            <label>Business Hours</label>
+            <textarea id="hoursText" rows="3" placeholder="e.g. Mon–Fri: 7am–6pm, Sat: 8am–2pm, Sun: Closed" maxlength="500" style="resize:vertical"></textarea>
+          </div>
+
+          <!-- Social Links -->
+          <div class="field">
+            <label>Google Business Profile URL</label>
+            <input type="text" id="googleProfileUrl" placeholder="e.g. https://g.page/yourbusiness" maxlength="300">
+          </div>
+          <div class="field">
+            <label>Facebook Page URL</label>
+            <input type="text" id="facebookUrl" placeholder="e.g. https://facebook.com/yourbusiness" maxlength="300">
+          </div>
+          <div class="field">
+            <label>Thumbtack Profile URL</label>
+            <input type="text" id="thumbtackUrl" placeholder="e.g. https://thumbtack.com/..." maxlength="300">
+          </div>
+
+          <!-- Logo Upload -->
+          <div class="field">
+            <label>Business Logo</label>
+            <div class="logo-upload-area">
+              <input type="file" id="logoFile" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml">
+              <div class="hint" style="margin-top:4px">JPEG, PNG, WebP, GIF, or SVG &mdash; max 2 MB</div>
+            </div>
+            <div id="logo-preview-wrap" style="display:none;margin-top:12px;display:none;align-items:center;gap:12px">
+              <img id="logo-preview" src="" alt="Logo preview" style="max-height:72px;max-width:180px;border:1px solid var(--border);border-radius:8px;padding:6px;background:#fff">
+              <button type="button" id="logo-clear" style="font-size:12px;font-weight:600;color:var(--red);background:none;border:none;cursor:pointer;padding:0">Remove</button>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div class="field">
+            <label>Services <span style="font-weight:400;color:var(--muted)">(up to 5)</span></label>
+            <div id="services-list"></div>
+            <button type="button" id="add-service-btn" class="add-service-btn">+ Add Service</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Beta code + Submit Card -->
+      <div class="card">
+        <div class="beta-section" style="border-top:none;margin-top:0;padding-top:0;">
+          <div class="field">
+            <label>Beta access code</label>
+            <input type="text" id="betaCode" value="freesites-launch">
+            <div class="hint">Enter your beta access code to bypass payment</div>
+          </div>
+        </div>
+        <button class="submit-btn" id="submit-btn">Generate My Website &rarr;</button>
+      </div>
+
+    </div>
+    <!-- ===== END FORM ===== -->
+
+    <!-- ===== BUILDING SCREEN ===== -->
+    <div id="building-screen">
+      <div class="build-card">
+        <div class="build-icon-wrap">
+          <span id="build-icon">&#9881;&#65039;</span>
+        </div>
+        <h2 id="build-title">Building your website&hellip;</h2>
+        <p id="build-sub">Claude AI is writing your custom contractor site. This usually takes 3&ndash;5 minutes.</p>
+
+        <div class="steps" id="steps">
+          <div class="step active" id="step-1"><span class="dot">1</span> Generating HTML with Claude AI</div>
+          <div class="step" id="step-2"><span class="dot">2</span> Deploying to Netlify</div>
+          <div class="step" id="step-3"><span class="dot">3</span> Running health check</div>
+          <div class="step" id="step-4"><span class="dot">4</span> Sending you confirmation email</div>
+        </div>
+
+        <div class="url-box" id="url-box">
+          <div class="label">Your site will be live at</div>
+          <a id="site-link" href="#" target="_blank" rel="noopener">&mdash;</a>
+        </div>
+
+        <div class="timer" id="timer-text">Elapsed: <span id="countdown">0</span>s &mdash; this page will update automatically when ready</div>
+
+        <div class="portal-link" id="portal-prompt" style="display:none">
+          <p>Once ready: <a id="site-open-link" href="#" target="_blank" rel="noopener" class="portal-open-btn">Open your site &rarr;</a></p>
+          <p style="margin-top:12px">Manage it anytime at <a href="/portal/login.html">your portal</a> &mdash; log in with the email you provided.</p>
+          <p style="margin-top:8px;color:var(--red);font-size:13px">If you don't get an email within 5 minutes, please try submitting again.</p>
+        </div>
+      </div>
+    </div>
+    <!-- ===== END BUILDING SCREEN ===== -->
+
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================ -->
+  <footer>
+    <p>&copy; 2025 FreeSites &middot; All rights reserved &middot; <a href="mailto:support@freesites.io">support@freesites.io</a></p>
+  </footer>
+
+  <script>
+  (function () {
+
+    // --- Optional section toggle ---
+    document.getElementById('optional-toggle').addEventListener('click', function () {
+      this.classList.toggle('open');
+      document.getElementById('optional-fields').classList.toggle('open');
+    });
+
+    // --- Logo upload ---
+    var logoBase64 = null;
+    var logoMimeType = null;
+
+    document.getElementById('logoFile').addEventListener('change', function () {
+      var file = this.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        alert('Logo must be 2 MB or smaller.');
+        this.value = '';
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        logoBase64 = e.target.result; // full data URL
+        logoMimeType = file.type;
+        document.getElementById('logo-preview').src = logoBase64;
+        document.getElementById('logo-preview-wrap').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('logo-clear').addEventListener('click', function () {
+      logoBase64 = null;
+      logoMimeType = null;
+      document.getElementById('logoFile').value = '';
+      document.getElementById('logo-preview-wrap').style.display = 'none';
+      document.getElementById('logo-preview').src = '';
+    });
+
+    // --- Services ---
+    var serviceCount = 0;
+
+    document.getElementById('add-service-btn').addEventListener('click', function () {
+      if (serviceCount >= 5) return;
+      serviceCount++;
+      var list = document.getElementById('services-list');
+      var row = document.createElement('div');
+      row.className = 'service-row';
+      row.dataset.idx = serviceCount;
+      row.innerHTML =
+        '<input type="text" placeholder="Service name" maxlength="100" class="svc-name">' +
+        '<textarea placeholder="Short description (optional)" maxlength="300" class="svc-desc"></textarea>' +
+        '<button type="button" class="rm-btn">✕</button>';
+      row.querySelector('.rm-btn').addEventListener('click', function () {
+        row.remove();
+        serviceCount--;
+        if (serviceCount < 5) document.getElementById('add-service-btn').style.opacity = '1';
+      });
+      list.appendChild(row);
+      if (serviceCount >= 5) this.style.opacity = '0.4';
+    });
+
+    // --- Submit ---
+    document.getElementById('submit-btn').addEventListener('click', async function () {
+      const btn = this;
+      const errorEl = document.getElementById('error-msg');
+      errorEl.classList.remove('show');
+
+      // Collect + validate required fields
+      const businessName = v('businessName');
+      const phone        = v('phone');
+      const email        = v('email');
+      const city         = v('city');
+      const state        = v('state');
+      const verticalType = v('verticalType');
+      const biggestChallenge = v('biggestChallenge');
+
+      if (!businessName || !phone || !email || !city || !state || !verticalType || !biggestChallenge) {
+        showError('Please fill in all required fields (marked with *).');
+        return;
+      }
+      if (!isEmail(email)) {
+        showError('Please enter a valid email address.');
+        return;
+      }
+
+      // Optional fields
+      const ownerName     = v('ownerName') || undefined;
+      const tagline       = v('tagline') || undefined;
+      const licenseNumber = v('licenseNumber') || undefined;
+      const bookingUrl    = v('bookingUrl') || undefined;
+      const yearsRaw      = v('yearsInBusiness');
+      const yearsInBusiness = yearsRaw !== '' ? parseInt(yearsRaw, 10) : undefined;
+      const googleRaw     = v('googleRating');
+      const googleRating  = googleRaw !== '' ? parseFloat(googleRaw) : undefined;
+      const reviewRaw     = v('reviewCount');
+      const reviewCount   = reviewRaw !== '' ? parseInt(reviewRaw, 10) : undefined;
+      const emergency24x7 = document.getElementById('emergency24x7').checked || undefined;
+      const insuranceVerified = document.getElementById('insuranceVerified').checked || undefined;
+      const serviceAreasRaw = v('serviceAreas');
+      const serviceAreas = serviceAreasRaw
+        ? serviceAreasRaw.split(',').map(s => s.trim()).filter(Boolean)
+        : undefined;
+      const betaCode = v('betaCode') || undefined;
+
+      // New optional fields
+      const hoursText        = v('hoursText') || undefined;
+      const googleProfileUrl = v('googleProfileUrl') || undefined;
+      const facebookUrl      = v('facebookUrl') || undefined;
+      const thumbtackUrl     = v('thumbtackUrl') || undefined;
+
+      // Services
+      const serviceRows = document.querySelectorAll('.service-row');
+      const services = [];
+      serviceRows.forEach(function (row) {
+        var name = row.querySelector('.svc-name').value.trim();
+        if (name) {
+          services.push({
+            name: name,
+            description: row.querySelector('.svc-desc').value.trim(),
+            featured: false,
+          });
+        }
+      });
+
+      const body = {
+        businessName, phone, email, city, state, verticalType, biggestChallenge,
+        ...(ownerName       !== undefined && { ownerName }),
+        ...(tagline         !== undefined && { tagline }),
+        ...(licenseNumber   !== undefined && { licenseNumber }),
+        ...(bookingUrl      !== undefined && { bookingUrl }),
+        ...(yearsInBusiness !== undefined && !isNaN(yearsInBusiness) && { yearsInBusiness }),
+        ...(googleRating    !== undefined && !isNaN(googleRating)    && { googleRating }),
+        ...(reviewCount     !== undefined && !isNaN(reviewCount)     && { reviewCount }),
+        ...(emergency24x7   && { emergency24x7: true }),
+        ...(insuranceVerified && { insuranceVerified: true }),
+        ...(serviceAreas?.length && { serviceAreas }),
+        ...(betaCode        !== undefined && { betaCode }),
+        ...(hoursText        !== undefined && { hoursText }),
+        ...(googleProfileUrl !== undefined && { googleProfileUrl }),
+        ...(facebookUrl      !== undefined && { facebookUrl }),
+        ...(thumbtackUrl     !== undefined && { thumbtackUrl }),
+        ...(services.length  && { services }),
+        ...(logoBase64 && logoMimeType && { logoBase64, logoMimeType }),
+      };
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      // Step 1: intake
+      let siteId;
+      try {
+        const res = await fetch('/api/intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showError(data.error || 'Intake failed. Please try again.');
+          btn.disabled = false;
+          btn.textContent = 'Generate My Website →';
+          return;
+        }
+        siteId = data.siteId;
+      } catch (e) {
+        showError('Could not connect to the server. Is netlify dev running?');
+        btn.disabled = false;
+        btn.textContent = 'Generate My Website →';
+        return;
+      }
+
+      // Step 2: trigger generation
+      try {
+        await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ siteId }),
+        });
+      } catch (_) { /* 202 background — ignore network errors */ }
+
+      // Show building screen
+      showBuildingScreen(siteId);
+    });
+
+    function showBuildingScreen(siteId) {
+      document.getElementById('form-screen').style.display = 'none';
+      document.getElementById('building-screen').style.display = 'block';
+
+      // Show placeholder until deployed
+      document.getElementById('site-link').textContent = 'Generating…';
+      document.getElementById('site-link').removeAttribute('href');
+
+      // Elapsed-time counter
+      let elapsed = 0;
+      const countEl = document.getElementById('countdown');
+      const ticker = setInterval(function () {
+        elapsed++;
+        countEl.textContent = elapsed;
+      }, 1000);
+
+      // Animate steps at fixed offsets (visual feedback while polling)
+      const STEP_DELAYS = [0, 30000, 90000, 150000];
+      STEP_DELAYS.forEach(function (delay, i) {
+        setTimeout(function () {
+          if (document.getElementById('building-screen').dataset.done) return;
+          const prev = document.getElementById('step-' + i);
+          const curr = document.getElementById('step-' + (i + 1));
+          if (prev) { prev.classList.remove('active'); prev.classList.add('done'); prev.querySelector('.dot').textContent = '✓'; }
+          if (curr) curr.classList.add('active');
+        }, delay);
+      });
+
+      // Poll /api/status/:siteId every 10 s; stop after 10 min
+      const MAX_POLLS = 60;
+      let polls = 0;
+
+      function poll() {
+        if (document.getElementById('building-screen').dataset.done) return;
+        polls++;
+        if (polls > MAX_POLLS) {
+          clearInterval(pollTimer);
+          clearInterval(ticker);
+          document.getElementById('timer-text').textContent =
+            'Still building — you\'ll receive an email with the link when it\'s ready.';
+          document.getElementById('portal-prompt').style.display = 'block';
+          return;
+        }
+        fetch('/api/status/' + siteId)
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.status === 'deployed' && data.deployedUrl) {
+              clearInterval(pollTimer);
+              clearInterval(ticker);
+              onBuildComplete(data.deployedUrl);
+            } else if (data.status === 'failed') {
+              clearInterval(pollTimer);
+              clearInterval(ticker);
+              onBuildFailed();
+            }
+          })
+          .catch(function () { /* network blip — keep polling */ });
+      }
+
+      // First check after 45 s (generation takes at least that long), then every 10 s
+      setTimeout(poll, 45000);
+      const pollTimer = setInterval(poll, 10000);
+    }
+
+    function onBuildComplete(deployedUrl) {
+      document.getElementById('building-screen').dataset.done = 'true';
+      for (let i = 1; i <= 4; i++) {
+        const s = document.getElementById('step-' + i);
+        if (s) { s.classList.remove('active'); s.classList.add('done'); s.querySelector('.dot').textContent = '✓'; }
+      }
+      document.getElementById('build-icon').textContent = '✅';
+      document.getElementById('build-title').textContent = 'Your website is live!';
+      document.getElementById('build-sub').textContent = 'Your site is ready. Click the link below to view it.';
+      document.getElementById('timer-text').textContent = '';
+
+      const linkEl = document.getElementById('site-link');
+      linkEl.textContent = deployedUrl;
+      linkEl.href = deployedUrl;
+
+      document.getElementById('portal-prompt').style.display = 'block';
+      document.getElementById('site-open-link').href = deployedUrl;
+    }
+
+    function onBuildFailed() {
+      document.getElementById('building-screen').dataset.done = 'true';
+      document.getElementById('build-icon').textContent = '❌';
+      document.getElementById('build-title').textContent = 'Something went wrong';
+      document.getElementById('build-sub').textContent =
+        'We hit a snag generating your site. Our team has been notified. Please try submitting again or contact support@freesites.io.';
+      document.getElementById('timer-text').textContent = '';
+    }
+
+    // --- Helpers ---
+    function v(id) { return document.getElementById(id).value.trim(); }
+    function isEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+    function showError(msg) {
+      const el = document.getElementById('error-msg');
+      el.textContent = msg;
+      el.classList.add('show');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
