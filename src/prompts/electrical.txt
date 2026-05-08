@@ -4,10 +4,7 @@ handles all visual decisions.
 
 DESIGN SYSTEM RULES:
 - The Design System Reference block above contains the complete <style> CSS.
-- Copy it verbatim into <head> as a single <style> block.
-- At the top of :root, override the accent with electrical amber:
-    --accent: #b45309;
-    --accent-l: #d97706;
+- Copy it verbatim into <head> as a single <style> block. No modifications.
 - Use ONLY the .fs-* CSS classes for all HTML elements.
 - Do NOT write any custom CSS, inline styles, or additional classes.
 - Do NOT invent colors, fonts, spacing, or component styles.

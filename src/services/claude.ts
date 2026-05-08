@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { ContentJson } from '../schemas/content.schema';
-import { assemblePrompt, loadDesignSpec } from '../prompts/loader';
+import { assemblePrompt, loadDesignSpec, extractDesignSystemBlocks } from '../prompts/loader';
 import { withRetry } from '../utils/retry';
 
 // ---------------------------------------------------------------------------
@@ -47,6 +47,31 @@ export function isValidHtml(text: string): boolean {
   // Only check the prefix — we trust Claude to produce complete documents.
   // slice(0, 15) avoids scanning the whole string for a cheap check.
   return text.trimStart().slice(0, 15).toLowerCase().startsWith('<!doctype html');
+}
+
+// ---------------------------------------------------------------------------
+// injectLockedCss — post-processor that guarantees the Stitch design system
+// CSS ends up in the final HTML regardless of what Claude generated.
+//
+// Claude may write its own <style> block despite instructions. This function
+// removes every <style> block from Claude's output and replaces it with the
+// exact CSS extracted from the design spec file. The HTML structure (class
+// names, sections) is still Claude's work; the CSS is always ours.
+// ---------------------------------------------------------------------------
+
+export function injectLockedCss(html: string, css: string): string {
+  // Strip all <style> blocks Claude produced
+  const stripped = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+
+  // Inject locked CSS before </head>
+  const injected = stripped.replace(/(<\/head\s*>)/i, `<style>\n${css}\n</style>\n$1`);
+
+  // Fallback: no </head> — inject immediately after <head> opening tag
+  if (injected === stripped) {
+    return stripped.replace(/(<head\b[^>]*>)/i, `$1\n<style>\n${css}\n</style>`);
+  }
+
+  return injected;
 }
 
 // ---------------------------------------------------------------------------
@@ -98,9 +123,13 @@ export async function generateSite(content: ContentJson): Promise<GenerationResu
   //   block 1 — static template prefix (cached) — identical per vertical,
   //             cache-hits on every call after the first within the TTL window.
   //   block 2 — dynamic client payload — changes per client, never cached.
-  const designSpec = loadDesignSpec();
+  const rawSpec = loadDesignSpec(assembled.verticalType);
+  const { css: designCss, patterns: designPatterns } = rawSpec
+    ? extractDesignSystemBlocks(rawSpec)
+    : { css: null, patterns: null };
+
   const dynamicText = payloadJson + (templateSuffix.trim() ? '\n' + templateSuffix : '');
-  const userBlocks = buildUserBlocks(templatePrefix, dynamicText, designSpec);
+  const userBlocks = buildUserBlocks(templatePrefix, dynamicText, designCss, designPatterns);
 
   const firstResponse = await withRetry(() =>
     withAbort(signal => client.messages.create(
@@ -121,7 +150,7 @@ export async function generateSite(content: ContentJson): Promise<GenerationResu
     });
 
     return {
-      html: firstHtml,
+      html: designCss ? injectLockedCss(firstHtml, designCss) : firstHtml,
       model: firstResponse.model,
       templateHash,
       inputTokens: firstResponse.usage.input_tokens,
@@ -174,7 +203,7 @@ export async function generateSite(content: ContentJson): Promise<GenerationResu
   log('generate.success', { siteId, retried: true, inputTokens: totalInput, outputTokens: totalOutput });
 
   return {
-    html: retryHtml,
+    html: designCss ? injectLockedCss(retryHtml, designCss) : retryHtml,
     model: retryResponse.model,
     templateHash,
     inputTokens: totalInput,
@@ -197,14 +226,28 @@ function extractText(response: Anthropic.Message): string {
 function buildUserBlocks(
   staticPart: string,
   dynamicPart: string,
-  designSpec: string | null = null,
+  designCss: string | null = null,
+  designPatterns: string | null = null,
 ): Anthropic.MessageParam['content'] {
   const blocks: Anthropic.ContentBlockParam[] = [];
 
-  if (designSpec) {
+  if (designCss) {
+    // Inject the CSS as a pre-built <style> tag so Claude copies it literally
+    // rather than interpreting a markdown document. This is what locks the design.
+    let specText =
+      '# LOCKED DESIGN SYSTEM\n\n' +
+      '## REQUIRED: Copy this exact <style> block into <head> — do not modify it\n\n' +
+      `<style>\n${designCss}\n</style>\n\n` +
+      'Do NOT add any CSS outside this block. Do NOT use inline styles.\n' +
+      'Use ONLY the .fs-* class names from this system for all HTML elements.\n';
+
+    if (designPatterns) {
+      specText += `\n## HTML Component Patterns — reference class names from these:\n\n${designPatterns}`;
+    }
+
     blocks.push({
       type: 'text',
-      text: `# Design System Reference\n\nApply this design system to every generated site:\n\n${designSpec}`,
+      text: specText,
       cache_control: { type: 'ephemeral' },
     });
   }
