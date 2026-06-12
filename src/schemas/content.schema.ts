@@ -129,12 +129,13 @@ export const VerticalRoofingSchema = z.object({
   insuranceClaims: z.boolean().default(false),
 });
 
-export const VerticalChurchSchema = z.object({
-  denomination: z.string().nullable().default(null),
-  weeklyServices: z.string().nullable().default(null),
-  communityPrograms: z.array(z.string()).default([]),
-  streamingAvailable: z.boolean().default(false),
-  youthPrograms: z.boolean().default(false),
+export const VerticalLawyerSchema = z.object({
+  criminalDefense: z.boolean().default(false),
+  familyLaw: z.boolean().default(false),
+  personalInjury: z.boolean().default(false),
+  realEstate: z.boolean().default(false),
+  estatePlanning: z.boolean().default(false),
+  freeConsultation: z.boolean().default(false),
 });
 
 export const SeoSchema = z.object({
@@ -231,13 +232,16 @@ export const ContentSchema = z.object({
   photos: z.array(PhotoSchema).default([]),
 
   // verticalType has no default — it must be set explicitly at intake.
-  verticalType: z.enum(['plumbing', 'electrical', 'hvac', 'roofing', 'church']),
+  verticalType: z.enum(['plumbing', 'electrical', 'hvac', 'roofing', 'church', 'lawyer']),
+  
 
   vertical_plumbing: VerticalPlumbingSchema.default({}),
   vertical_electrical: VerticalElectricalSchema.default({}),
   vertical_hvac: VerticalHvacSchema.default({}),
   vertical_roofing: VerticalRoofingSchema.default({}),
   vertical_church: VerticalChurchSchema.default({}),
+  vertical_lawyer: VerticalLawyerSchema.default({}),
+  
 
   seo: SeoSchema.default({}),
 
@@ -267,6 +271,7 @@ export type VerticalElectrical = z.infer<typeof VerticalElectricalSchema>;
 export type VerticalHvac = z.infer<typeof VerticalHvacSchema>;
 export type VerticalRoofing = z.infer<typeof VerticalRoofingSchema>;
 export type VerticalChurch = z.infer<typeof VerticalChurchSchema>;
+export type VerticalLawyer = z.infer<typeof VerticalLawyerSchema>;
 export type Seo = z.infer<typeof SeoSchema>;
 export type Billing = z.infer<typeof BillingSchema>;
 export type Deployment = z.infer<typeof DeploymentSchema>;
