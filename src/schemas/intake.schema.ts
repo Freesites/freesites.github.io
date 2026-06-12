@@ -40,7 +40,7 @@ export const IntakeSchema = z.object({
   email: z.string().trim().email(),
   city: z.string().trim().min(1).max(100),
   state: z.string().trim().min(2).max(50),
-  verticalType: z.enum(['plumbing', 'electrical', 'hvac', 'roofing', 'church']),
+  verticalType: z.enum(['plumbing', 'electrical', 'hvac', 'roofing', 'church', 'lawyer']),
   biggestChallenge: BiggestChallengeSchema,
 
   // -------------------------------------------------------------------------
